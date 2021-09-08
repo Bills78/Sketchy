@@ -1,3 +1,3 @@
 # Sketchy
-etch-a-sketch game
+etch-a-sketch game:
 button currently broken
