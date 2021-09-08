@@ -3,6 +3,7 @@ const container = document.createElement('div');
 const btn = document.createElement('button');
 const title = document.querySelector('.title');
 
+
 container.classList.add('container');
 body.append(container);
 
@@ -16,7 +17,7 @@ function findSides(sqrs) {
 
 function createSqr(x) {
     const square = document.createElement('div');
-    square.className ='sqr';
+    square.className = 'sqr';
     square.setAttribute('style', `width: ${findSides(x)}px; height: ${findSides(x)}px`)
     square.addEventListener('mouseenter', () => {
         square.style.backgroundColor = 'gray';
@@ -38,8 +39,13 @@ function makeSqrs(x) {
 
 btn.addEventListener('click', () => {
     // empty sketch old sqrs
-    const allSqrs = document.querySelectorAll('.sqr');
-    allSqrs.remove();
+    const squares = document.querySelectorAll('.sqr')
+    const div = document.querySelector('.sqr')
+    
+    squares.forEach(() => {
+        div.remove()
+    })
+    
     // prompt user for number of sqrs per side, then input into makeSqrs()
     const x = prompt('Pick the number of squares per side', placeholder=('must be between 4 - 64'));
     makeSqrs(x);
