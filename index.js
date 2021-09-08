@@ -2,53 +2,59 @@ const body = document.querySelector('body');
 const container = document.createElement('div');
 const btn = document.createElement('button');
 const title = document.querySelector('.title');
-
+const colorBtn = document.createElement('button')
+const btns = document.createElement('div')
 
 container.classList.add('container');
 body.append(container);
 
-btn.innerText = 'Clear-Le-Sketch'
-title.append(btn);
+btn.innerText = 'Clear-Le-Sketch';
+
+
+colorBtn.innerText = 'Color-Le-Sketch';
+colorBtn.classList.add('color');
+
+btns.append(colorBtn);
+btns.append(btn);
+title.append(btns);
+
+const makeRandColor = () => {
+    const r = Math.floor(Math.random() * 255)
+    const g = Math.floor(Math.random() * 255)
+    const b = Math.floor(Math.random() * 255)
+
+    return `rgb(${r},${g},${b})`
+};
 
 function findSides(sqrs) {
     x = 400 / sqrs;
     return x;
-}
-
-function createSqr(x) {
-    const square = document.createElement('div');
-    square.className = 'sqr';
-    square.setAttribute('style', `width: ${findSides(x)}px; height: ${findSides(x)}px`)
-    square.addEventListener('mouseenter', () => {
-        square.style.backgroundColor = 'gray';
-    });
-    container.append(square);
 };
 
-
-function makeSqrs(x) {
+function makeSqrs(x, color) {
     if (x > 64 || x < 4) {
         alert('Sorry, you must pick a number between 4 and 64...')
     } else {
         y = x * x;
         for(let i = 0; i < y; i++) {
-            createSqr(x)
+            const square = document.createElement('div');
+            square.setAttribute('style', `width: ${findSides(x)}px; height: ${findSides(x)}px`)
+            square.addEventListener('mouseenter', () => {
+                square.style.backgroundColor = `${color}`;
+            });
+            container.append(square);
         };
     };
 };
 
 btn.addEventListener('click', () => {
-    // empty sketch old sqrs
-    const squares = document.querySelectorAll('.sqr')
-    const div = document.querySelector('.sqr')
-    
-    squares.forEach(() => {
-        div.remove()
-    })
-    
-    // prompt user for number of sqrs per side, then input into makeSqrs()
-    const x = prompt('Pick the number of squares per side', placeholder=('must be between 4 - 64'));
-    makeSqrs(x);
+    container.innerHTML = '';
+    makeSqrs(prompt('How many Squares per side?', placeholder="4 - 64"), 'black');
 });
 
-makeSqrs(16);
+colorBtn.addEventListener('click', () => {
+    container.innerHTML = '';
+    makeSqrs(prompt('How many Squares per side?', placeholder="4 - 64"), makeRandColor(makeRandColor()));
+});
+
+makeSqrs(16, 'black');
