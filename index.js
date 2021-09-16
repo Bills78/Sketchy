@@ -38,10 +38,16 @@ function makeSqrs(x, color) {
         y = x * x;
         for(let i = 0; i < y; i++) {
             const square = document.createElement('div');
-            square.setAttribute('style', `width: ${findSides(x)}px; height: ${findSides(x)}px`)
-            square.addEventListener('mouseenter', () => {
-                square.style.backgroundColor = `${color}`;
-            });
+            square.setAttribute('style', `width: ${findSides(x)}px; height: ${findSides(x)}px`);
+            if (color !== 'black'){
+                square.addEventListener('mouseenter', () => {
+                square.style.backgroundColor = `${makeRandColor()}`;
+                });
+            } else {
+                square.addEventListener('mouseenter', () => {
+                square.style.backgroundColor = 'black';
+                });
+            }
             container.append(square);
         };
     };
@@ -49,12 +55,12 @@ function makeSqrs(x, color) {
 
 btn.addEventListener('click', () => {
     container.innerHTML = '';
-    makeSqrs(prompt('How many Squares per side?', placeholder="4 - 64"), 'black');
+    makeSqrs(prompt('How many Squares per side?', placeholder="16"), 'black');
 });
 
 colorBtn.addEventListener('click', () => {
     container.innerHTML = '';
-    makeSqrs(prompt('How many Squares per side?', placeholder="4 - 64"), makeRandColor(makeRandColor()));
+    makeSqrs(prompt('How many Squares per side?', placeholder="16"), makeRandColor());
 });
 
 makeSqrs(16, 'black');
