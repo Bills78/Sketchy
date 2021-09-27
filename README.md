@@ -1,3 +1,3 @@
 # Sketchy
 etch-a-sketch game:
-button currently broken
+pick the size of the board you would like, and even make it rainbow colored. 
